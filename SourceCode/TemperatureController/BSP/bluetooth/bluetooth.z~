@@ -1,0 +1,121 @@
+#include "bluetooth.h"
+#include "stm32f10x_usart.h"
+#include "stm32f10x_gpio.h"
+#include "app.h"
+#include "..\..\APP\includes.h"
+
+extern OS_EVENT *atCmdMailbox;
+__IO AppCmd cmd;
+__IO uint8_t buffer[100];
+__IO uint8_t index = 0;
+
+void ble_init(void)
+{
+    u8 data;
+    GPIO_InitTypeDef GPIO_InitStructure;
+    USART_InitTypeDef USART_InitStructure;
+    if (BLE_USARTAPB == APB1)
+    {
+        RCC_APB2PeriphClockCmd(RCC_APBxPeriph_BLE_USART_IO | RCC_APB2Periph_AFIO,ENABLE);
+        RCC_APB1PeriphClockCmd(RCC_APBxPeriph_BLE_USART,ENABLE);
+    }
+    else
+    {
+        RCC_APB2PeriphClockCmd(RCC_APBxPeriph_BLE_USART_IO | RCC_APBxPeriph_BLE_USART | RCC_APB2Periph_AFIO,ENABLE);
+    }
+    if (BLE_PinRemap == ENABLE)
+    {  				 
+        GPIO_PinRemapConfig(GPIO_Remap_USART2,ENABLE);
+    }
+    GPIO_InitStructure.GPIO_Pin = BLE_USART_TXD;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(BLE_USART_IO,&GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = BLE_USART_RXD;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(BLE_USART_IO,&GPIO_InitStructure);
+
+    USART_InitStructure.USART_BaudRate = 115200;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None ;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx|USART_Mode_Tx;
+    USART_Init(BLE_USART,&USART_InitStructure);
+    data = data;
+    data = BLE_USART->DR;
+    data = BLE_USART->SR;
+    USART_ITConfig(BLE_USART,USART_IT_RXNE,ENABLE);
+    USART_Cmd(BLE_USART,ENABLE);
+
+	USART_SendData(BLE_USART, 0x55);
+	OSTimeDlyHMSM(0, 0, 1, 0);
+	USART_SendData(BLE_USART, 0x55);
+	OSTimeDlyHMSM(0, 0, 1, 0);
+	USART_SendData(BLE_USART, 0x00);
+	OSTimeDlyHMSM(0, 0, 1, 0);
+	USART_SendData(BLE_USART, 0x00);
+	OSTimeDlyHMSM(0, 0, 1, 0);
+	USART_SendData(BLE_USART, 0x3e);
+
+	response();
+}
+
+void clearBuffer(uint8_t *buf, int len)
+{
+    memset(buf, 0x00, len);
+}
+
+void response(void)
+{
+    uint8_t i = 0;
+    uint8_t resp[5] = {0x55, 0x55, 0x00, 0x00, 0x3e};
+    for(i = 0; i < 5; i++) {
+        USART_SendData(BLE_USART, resp[i]);
+    }
+}
+
+void handleData(uint8_t data)
+{
+	uint8_t i;
+    uint8_t type;
+    uint8_t len;
+    if(data == 0x3e) {
+        //process buffer
+        //...
+        if(buffer[0] == 0x55 && (buffer[1] == 0x55)) {
+            type = buffer[2];
+            len = buffer[3];
+            cmd.type = type;
+            cmd.len = len;
+            if(len > 0) {
+                for(i = 0; i < len; i++) {
+                    cmd.data[i] = buffer[4 + i];
+                }
+            }
+            clearBuffer((uint8_t *)buffer, 100);
+            OSMboxPost(atCmdMailbox, (void *)&cmd);
+            index = 0;
+        }
+    } else {
+        buffer[index ++] = data;
+    }
+}
+
+void BLE_USART_IRQHandler(void)
+{
+    uint8_t data;
+
+    if(USART_GetITStatus(BLE_USART, USART_IT_RXNE)
+            != RESET) {
+        data = USART_ReceiveData(BLE_USART);
+        handleData(data);
+    }
+
+    if(USART_GetITStatus(BLE_USART, USART_IT_TXE)
+            != RESET) {
+        USART_ITConfig(BLE_USART, USART_IT_TXE, DISABLE);
+    }
+}

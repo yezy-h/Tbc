@@ -1,0 +1,299 @@
+<resources>
+    <string name="app_name">程序温控箱</string>
+
+    <string name="bluetooth_disconnected">未连接</string>
+    <string name="bluetooth_connected">已连接</string>
+    <string name="main">主界面</string>
+    <string name="action_open">打开</string>
+    <string name="action_save">保存</string>
+    <string name="action_file_export">文件导出</string>
+    <string name="action_print">打印</string>
+    <string name="action_set_wavelength">设置波长</string>
+    <string name="action_baseline">建立基线</string>
+    <string name="action_peak_distance">峰高设置</string>
+    <string name="action_dark_current">暗电流测试</string>
+    <string name="wavelength">波长</string>
+    <string name="abs">吸光度</string>
+    <string name="trans">透过率</string>
+    <string name="action_settings">设置</string>
+    <string name="photometric_measurement">光度测量</string>
+    <string name="quantitative_analysis">定量分析</string>
+    <string name="wavelength_scan">波长扫描</string>
+    <string name="time_scan">时间扫描</string>
+    <string name="multi_wavelength">多波长测试</string>
+    <string name="hesuan">核酸蛋白</string>
+    <string name="about">关于我们</string>
+    <string name="ok_string">确定</string>
+    <string name="cancel_string">取消</string>
+    <string name="start_test">开始测试</string>
+    <string name="stop_test">停止测试</string>
+    <string name="rezero">校正空白</string>
+    <string name="set_wavelength">设置波长</string>
+    <string name="retry_to_exit">请再按下返回键来退出！</string>
+    <string name="index">序号</string>
+    <string name="wavelength_with_unit">波长(nm)</string>
+    <string name="abs_with_unit">吸光度(Abs)</string>
+    <string name="trans_with_unit">透过率(%T)</string>
+    <string name="energy">能量</string>
+    <string name="action_delete">删除</string>
+    <string name="action_selectall">全选</string>
+    <string name="ble_not_support">手机不支持BLE功能</string>
+    <string name="select_devices">选择连接的设备</string>
+    <string name="attempt_connecting_device">正在连接设备</string>
+    <string name="interval">间隔</string>
+    <string name="mode">模式</string>
+    <string name="ratio">斜率</string>
+    <string name="time_with_unit">时间(s)</string>
+    <string name="process">曲线处理</string>
+    <string name="smooth">曲线平滑</string>
+    <string name="name">名称</string>
+    <string name="conc">浓度</string>
+    <string name="sample_fitting">样品标定</string>
+    <string name="method_fitting_one">一阶拟合</string>
+    <string name="unit_ug_ml">ug/ml</string>
+    <string name="notice_string">提示</string>
+    <string name="sure_to_delete">确定要删除选择项?</string>
+    <string name="set_wavelength_message">等待设置波长完成...</string>
+    <string name="data_processing_message">数据处理中...</string>
+    <string name="connect_done">成功连接昂拉设备!</string>
+    <string name="notice_rezero">请先校正空白!</string>
+    <string name="do_fitting">拟合</string>
+    <string name="title_timescan_setting_work_wavelength">设定工作波长</string>
+    <string name="title_timescan_work_wavelength">工作波长</string>
+    <string name="summary_timescan_work_wavelength">点击请输入波长</string>
+    <string name="title_timescan_setting_x">时间设定(X轴)</string>
+    <string name="title_timescan_start">开始时间</string>
+    <string name="summary_timescan_start">点击输入开始时间</string>
+    <string name="title_timescan_end">结束时间</string>
+    <string name="summary_timescan_end">点击输入结束时间</string>
+    <string name="setting_timescan_title">时间扫描设置</string>
+    <string name="title_timescan_interval">时间间隔</string>
+    <string name="summary_timescan_interval">点击输入时间间隔</string>
+    <string name="reset">重置</string>
+    <string name="nm">nm</string>
+    <string name="s">s</string>
+    <string name="connect_timeout">连接超时</string>
+    <string name="timeout_set_wavelength">设置波长超时</string>
+    <string name="timeout_process">处理数据超时</string>
+    <string name="notice_not_init">请先成功连接昂拉设备</string>
+    <string name="title_test_mode">测试模式</string>
+    <string name="summary_timescan_test_mode">点击选择测试模式</string>
+    <string name="title_timescan_setting_y">坐标设定(Y轴)</string>
+    <string name="title_limit_up">坐标上限</string>
+    <string name="title_limit_down">坐标下限</string>
+    <string name="summary_limit_up">点击输入坐标上限</string>
+    <string name="summary_limit_down">点击输入坐标下限</string>
+    <string name="abs_unit">Abs</string>
+    <string name="trans_unit">%T</string>
+    <string name="setting_wavelengthscan_title">波长扫描设置</string>
+    <string name="title_wavelength_test_mode_y">测试模式(Y轴)</string>
+    <string name="summary_wavelength_test_mode">点击选择测试模式</string>
+    <string name="title_wavelength_y">坐标设定(Y轴)</string>
+    <string name="title_wavelength_x">波长设定(X轴)</string>
+    <string name="title_wavelength_start">起始波长</string>
+    <string name="title_wavelength_end">结束波长</string>
+    <string name="title_scan_speed">扫描速度</string>
+    <string name="speed_standard">标准</string>
+    <string name="title_wavelength_interval">波长间隔</string>
+    <string name="summary_wavelength_interval">点击选择波长间隔</string>
+    <string name="notice_edit_null">请输入正确的数值！</string>
+    <string name="setting_qa_title">定量分析设置</string>
+    <string name="title_fitting_method">拟合方式</string>
+    <string name="summary_fitting_method">点击选择拟合方式</string>
+    <string name="title_conc_unit">浓度单位</string>
+    <string name="summary_conc_unit">点击选择浓度单位</string>
+    <string name="standard_sample_fitting">标准样品标定</string>
+    <string name="formalu_ratio">方程系数</string>
+    <string name="formalu_detail1">CONC = K1 x A</string>
+    <string name="formalu_detail2">CONC = K0 + K1 x A</string>
+    <string name="wavelength_setting">波长设置</string>
+    <string name="nm_ratio1"> nm   系数1</string>
+    <string name="wavelength1">波长1</string>
+    <string name="nm_ratio2"> nm   系数2</string>
+    <string name="wavelength2">波长2</string>
+    <string name="nm_ratio3"> nm   系数3</string>
+    <string name="wavelength3">波长3</string>
+    <string name="system_setting">系统应用</string>
+    <string name="acurrency_setting">精度设置</string>
+    <string name="baseline_message">正在建立基线...</string>
+    <string name="baseline_done">建立基线完成</string>
+    <string name="rezero_message">正在空白校正...</string>
+    <string name="add">添加</string>
+    <string name="sample_conc_setting">设置样品浓度</string>
+    <string name="test">测试</string>
+    <string name="multi_wavelength_setting">多波长测试设置</string>
+    <string name="add_item">+添加</string>
+    <string name="sample">标样</string>
+    <string name="notice_delete">删除</string>
+    <string name="noting_selected">当前没有选择项</string>
+    <string name="notice_setting_null">波长设置为空！</string>
+    <string name="notice_select_null">选择数据不正确</string>
+    <string name="notice_save_null">不能保存空数据</string>
+    <string name="notice_fitting_null">还未生成拟合曲线！</string>
+    <string name="name_setting">设置实验名称</string>
+    <string name="notice_wavelength_invalid">输入波长无效，有效范围为: 190 ~ 1100</string>
+    <string name="test_message">测试中...</string>
+    <string name="gain">放大倍数</string>
+    <string name="not_save">直接退出</string>
+    <string name="notice_name_invalid">名称无效字符</string>
+    <string name="regist_code">注册码</string>
+    <string name="license">授权码</string>
+    <string name="regist_code_title">注册授权码</string>
+    <string name="sure_to_disconnect">确定断开当前连接?</string>
+    <string name="notice">提示</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="peak_setting">峰高设置</string>
+    <string name="peak_distance">峰高</string>
+    <string name="current">当前</string>
+    <string name="line">曲线</string>
+    <string name="select_lines">选择曲线</string>
+    <string name="lines_less_than_2">当前曲线少于2条</string>
+    <string name="notice_select_2">只能选择两条曲线</string>
+    <string name="select_operation">选择运算方式</string>
+    <string name="self_checking">设备自检中请稍后...</string>
+    <string name="lamp">灯切换</string>
+    <string name="ad">检测器</string>
+    <string name="deuterium">氘灯</string>
+    <string name="tungsten">钨灯</string>
+    <string name="wave">波长校正</string>
+    <string name="para">系统参数</string>
+    <string name="dark">暗电流</string>
+    <string name="warm">系统预热</string>
+    <string name="ing">...</string>
+    <string name="done">完成</string>
+    <string name="skip_warm">跳过系统预热</string>
+    <string name="device_selfcheck">设备自检</string>
+    <string name="start_time">起始时间</string>
+    <string name="end_time">结束时间</string>
+    <string name="calc_ratio">计算因子</string>
+    <string name="calc_speed_title">计算反应速率</string>
+    <string name="calc_speed_result">反应速率: </string>
+    <string name="deuterium_switch">开关氘灯</string>
+    <string name="deuteruim_clear_time">氘灯时间清零</string>
+    <string name="tungsten_switch">开关钨灯</string>
+    <string name="tungsten_clear_time">钨灯时间清零</string>
+    <string name="set_switch_wavelength">设置切换波长</string>
+    <string name="reset_dark">正在校正暗电流</string>
+    <string name="analysis_method">分析方法</string>
+    <string name="method_one">方法一</string>
+    <string name="method_two">方法二</string>
+    <string name="method_custom">自定义方法</string>
+    <string name="wavelength_ref">参考波长</string>
+    <string name="parameter_setting">参数设定</string>
+    <string name="F1">F1=</string>
+    <string name="F2">F2=</string>
+    <string name="F3">F3=</string>
+    <string name="F4">F4=</string>
+    <string name="sample_name">样品名称</string>
+    <string name="dna_with_unit">DNA(ug/ml)</string>
+    <string name="protein_with_unit">Protein(ug/ml)</string>
+    <string name="radio">radio</string>
+    <string name="sample_name_setting">设置样品名称</string>
+    <string name="txt">txt</string>
+    <string name="cvs">cvs</string>
+
+    <string name="key_timescan_setting_start">key_setting_timescan_start</string>
+    <string name="key_timescan_setting_end">key_setting_timescan_end</string>
+    <string name="key_timescan_setting_work_wavelength">key_setting_timescan_work_wavelength</string>
+
+    <string-array name="operations">
+        <item>加法</item>
+        <item>减法</item>
+        <item>乘法</item>
+        <item>除法</item>
+    </string-array>
+
+    <string-array name="processings">
+        <item>光谱平滑</item>
+        <item>峰谷查找</item>
+        <item>导数光谱</item>
+        <item>四则运算</item>
+    </string-array>
+
+    <string-array name="processings_ts">
+        <item>光谱平滑</item>
+        <item>峰谷查找</item>
+        <item>导数光谱</item>
+        <item>四则运算</item>
+        <item>反应速率计算</item>
+    </string-array>
+
+    <string-array name="acurrencys">
+        <item>高精度</item>
+        <item>低精度</item>
+    </string-array>
+
+    <string-array name="system_settings">
+        <item>精度设置</item>
+        <item>波长校正</item>
+        <item>暗电流校正</item>
+        <item>光源管理</item>
+        <item>文件管理</item>
+        <item>注册授权码</item>
+        <item>恢复出厂设置</item>
+        <item>系统版本</item>
+    </string-array>
+
+    <string-array name="fitting_methods">
+        <item>一阶过零</item>
+        <item>一阶拟合</item>
+    </string-array>
+
+    <string-array name="concs">
+        <item>ug/ml</item>
+        <item>mg/ml</item>
+        <item>mg/L</item>
+        <item>g/L</item>
+        <item>mM/L</item>
+        <item>M/L</item>
+        <item>ppm</item>
+        <item>ppb</item>
+        <item>%</item>
+        <item>IU</item>
+    </string-array>
+
+    <string-array name="wavelength_settings">
+        <item>单波长法</item>
+        <item>双波长法</item>
+        <item>三波长法</item>
+    </string-array>
+
+    <string-array name="intervals">
+        <item>0.1</item>
+        <item>0.2</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="speeds">
+        <item>快速</item>
+        <item>标准</item>
+        <item>慢速</item>
+    </string-array>
+
+    <string-array name="open_titles">
+        <item>光度测量</item>
+        <item>定量分析</item>
+        <item>波长扫描</item>
+        <item>时间扫描</item>
+        <item>多波长测试</item>
+        <item>核酸蛋白</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>光度测量</item>
+        <item>定量分析</item>
+        <item>波长扫描</item>
+        <item>时间扫描</item>
+        <item>多波长测试</item>
+        <item>核酸蛋白</item>
+        <item>系统设置</item>
+        <item>关于我们</item>
+    </string-array>
+
+    <string name="version_string">V16.08.04</string>
+</resources>

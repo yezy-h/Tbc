@@ -15,10 +15,11 @@
 #include "pid.h"
 
 #define SSR_PERIOD      2000
-#define SSR_PERIOD_PER  200
-#define SSR_MAX         10
+#define SSR_PERIOD_PER  20
+#define SSR_MAX         100
 
 #define SAMPLE_SIZE        11
+#define DEFAULT_OUTPUT      30
 
 OS_EVENT* atCmdMailbox;
 int isRunning = 0;
@@ -194,41 +195,24 @@ static  void App_TaskCreate(void)
 
 static double convert_temp(double input);
 
-typedef struct pid {
-    double setpoint;
-    double proportion;
-    double integral;
-    double derivate;
-    double last_error;
-    double prev_error;
-    double sum_error;
-} PID;
-
-double pid_calc(PID *pp, double next_point)
-{
-    double dError;
-    double error;
-
-    error = pp->setpoint - next_point;
-    pp->sum_error += error;
-    dError = pp->last_error - pp->prev_error;
-    pp->prev_error = pp->last_error;
-    pp->last_error = error;
-
-    return (pp->proportion * error + pp->integral * pp->sum_error
-            + pp->derivate * dError);
-}
-
 double current_temp = 0.0f;
 
 double get_ratio(int interval)
 {
     uint8_t i = 0;
     double ratio = 0;
-    for(i = 1; i < 3; i++) {
-        ratio += (mTemp0[i] - mTemp0[i - 1]) * 2;
+    uint8_t valid_size = SAMPLE_SIZE;;
+
+    for(i = 0; i < SAMPLE_SIZE; i++) {
+        if(mTemp0[i] == 0.0f){
+            valid_size = i;
+            break;
+        }
     }
-    ratio /= 2;
+
+    if(valid_size > 0) {
+        ratio = (mTemp0[valid_size - 1] - mTemp0[0]) / interval;
+    }
 
     for(i = 0; i < SAMPLE_SIZE; i++) {
         printf("%.4f  ", mTemp0[i]);
@@ -238,6 +222,7 @@ double get_ratio(int interval)
     return ratio;
 }
 
+//main task
 static void task_process_atcmd(void *parg)
 {
     uint16_t result0, result1;
@@ -245,14 +230,14 @@ static void task_process_atcmd(void *parg)
     int delta[SAMPLE_SIZE - 1];
     double ratio;
     double point = 10.0f / 60.0f;
-    double output;
-    double D = 30.0f;
+    static double output;
+    double D = 60.0f;
 
     (void)parg;
 
     twi_init();
 
-    set_ssr1(0);
+    set_ssr1(DEFAULT_OUTPUT);
     while(1) {
         result0 = ads1100_get_result(0);
         OSTimeDlyHMSM(0, 0, 0, 10);
@@ -274,22 +259,22 @@ static void task_process_atcmd(void *parg)
         mTemp1[0] = convert_temp(result1);
 
         current_temp = mTemp0[0];
-        ratio = get_ratio(3);
+        ratio = get_ratio(1);
         printf("ratio = %f\r\n", ratio);
-        output = D * (point - ratio);
-        
+        output = output - D * (ratio - point);
+
         printf("output = %f\r\n", output);
-        if(output > 10) {
-            output = 10;
-        } else if(output < 0) {
-            output = 0;
+        if(output > SSR_MAX) {
+            output = SSR_MAX;
+        } else if(output < SSR_MIN) {
+            output = SSR_MIN;
         }
         if(mTemp0[10] != 0) {
             set_ssr1(output);
             printf("output = %f\r\n", output);
         }
 
-        OSTimeDlyHMSM(0, 0, 3, 0);
+        OSTimeDlyHMSM(0, 0, 1, 0);
     }
 }
 
